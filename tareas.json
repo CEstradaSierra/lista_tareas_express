@@ -1,0 +1,20 @@
+[
+    {
+        "id": "e1eedc57-17a4-4405-9723-c508b6ba05a6",
+        "name": "tarea Numero 2",
+        "descripcion": "desc 2",
+        "isCompleted": true
+    },
+    {
+        "id": "ceb2c975-f68f-43ba-b116-4a488d36fea4",
+        "name": "Nombre de la tarea",
+        "descripcion": "Descripción de la tarea",
+        "isCompleted": false
+    },
+    {
+        "id": "64fb1c5b-709c-4d4e-86ba-fc2811e3823e",
+        "name": "tarea1",
+        "descripcion": "des1",
+        "isCompleted": false
+    }
+]
