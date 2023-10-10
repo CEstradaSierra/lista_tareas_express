@@ -72,6 +72,29 @@ function actualizarEstado(name, isCompleted) {
         return false
     }
 }
+//funcion para ver las tareas completas
+function tareasCompletas() {
+    cargarDB()
+    const tareasCompletes = []
+    listaTareas.forEach(t => {
+        if (t.isCompleted === true) {
+            tareasCompletes.push(t)
+        }
+    })
+    return tareasCompletes
+}
+//funcion para ver tareas incompletas
+function tareasIncompletas() {
+    cargarDB()
+    const tareasIncompletes = []
+    listaTareas.forEach(t => {
+        if (t.isCompleted === false) {
+            tareasIncompletes.push(t)
+        }
+    }
+    )
+    return tareasIncompletes
+}
 //funcion eliminar tarea 
 function borrarTarea(name) {
     //cargo las tareas para buscar
@@ -88,6 +111,18 @@ function borrarTarea(name) {
         return false;
     }
 }
+//funcion para editar o actualizar la tarea 
+function editarTarea(id, newName, newDescription) {
+    cargarDB()
+    const tarea = listaTareas.find(t => t.id == id)
+    if (tarea) {
+        const newTarea = listaTareas.map(t => {
+            t.name = newName;
+            t.descripcion = newDescription;
+        })
+        guardarDB()
+    }
+}
 
 module.exports = {
     guardarDB,
@@ -95,5 +130,9 @@ module.exports = {
     borrarTarea,
     actualizarEstado,
     cargarDB,
-    getListado
+    getListado,
+    tareasCompletas,
+    tareasIncompletas,
+    listaTareas,
+    editarTarea
 }
