@@ -1,6 +1,12 @@
 const express = require('express')
 const { getListado } = require("./tareas")
 const app = express()
+
+const listView = require("./routes/list-view-router")
+//modulo list edit
+const listEdit = require("./routes/list-edit-router");
+const USERS_BBDD = require('./bbdd');
+const authTokenRouter = require('./routes/auth_token')
 // Middleware para validar métodos HTTP
 const validarMetodoHTTP = (req, res, next) => {
     const metodosValidos = ['GET', 'POST', 'PUT', 'DELETE']; // Define los métodos válidos
@@ -14,16 +20,18 @@ const validarMetodoHTTP = (req, res, next) => {
 
 // Aplicar el middleware a nivel de la aplicación
 app.use(validarMetodoHTTP);
+app.use(express.json())
 // modulo list view
-const listView = require("./routes/list-view-router")
-//modulo list edit
-const listEdit = require("./routes/list-edit-router")
-const port = process.env.PORT || 3000
+//const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 
 //uso el modulo list-view
 app.use("/lista", listView)
 //uso el modulo list-edit
 app.use("/edit", listEdit)
+
+//modulo para  auth token 
+app.use("/auth", authTokenRouter)
 app.get("/api/tareas", (req, res) => {
     try {
         res.status(200).send(getListado())
