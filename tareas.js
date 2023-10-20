@@ -116,11 +116,22 @@ function editarTarea(id, newName, newDescription) {
     cargarDB()
     const tarea = listaTareas.find(t => t.id == id)
     if (tarea) {
-        const newTarea = listaTareas.map(t => {
+        const editedTarea = listaTareas.map(t => {
             t.name = newName;
             t.descripcion = newDescription;
         })
         guardarDB()
+        //return editedTarea
+    }
+}
+
+//obtener una sola tarea 
+function obtenerUnaTarea(id) {
+    const task = listaTareas.find(t => t.id === id)
+
+    if (task) {
+        cargarDB()
+        return task
     }
 }
 
@@ -134,5 +145,6 @@ module.exports = {
     tareasCompletas,
     tareasIncompletas,
     listaTareas,
-    editarTarea
+    editarTarea,
+    obtenerUnaTarea
 }

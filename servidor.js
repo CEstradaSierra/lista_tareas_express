@@ -6,7 +6,8 @@ const listView = require("./routes/list-view-router")
 //modulo list edit
 const listEdit = require("./routes/list-edit-router");
 const USERS_BBDD = require('./bbdd');
-const authTokenRouter = require('./routes/auth_token')
+const authTokenRouter = require('./routes/auth_token');
+const apiRouter = require('./routes/rest_api');
 // Middleware para validar métodos HTTP
 const validarMetodoHTTP = (req, res, next) => {
     const metodosValidos = ['GET', 'POST', 'PUT', 'DELETE']; // Define los métodos válidos
@@ -32,7 +33,10 @@ app.use("/edit", listEdit)
 
 //modulo para  auth token 
 app.use("/auth", authTokenRouter)
-app.get("/api/tareas", (req, res) => {
+
+//rutas para la rest api
+app.use('/api', apiRouter)
+app.get("/tareas", (req, res) => {
     try {
         res.status(200).send(getListado())
     } catch (err) {
